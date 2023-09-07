@@ -1,0 +1,31 @@
+ # ╭────────────╮
+ # │ Defaults   │
+ # ╰────────────╯
+# always_parse_args=true
+# insensitive=true
+# layer=overlay
+# print_command=true
+# prompt=
+# show=drun
+# show_all=true
+# location=top
+# height=500
+# width=600
+
+ # ╭────────────────────────────────────────────────────────────────────────────╮
+ # │ Stealing from https://github.com/JoshM-Yoru/dotfiles/blob/main/wofi/config │
+ # ╰────────────────────────────────────────────────────────────────────────────╯
+allow_images = true
+image_size = 30
+always_parse_args=true
+content_halign = fill
+insensitive=true
+print_command=true
+prompt = Search...
+show=drun
+show_all=true
+
+height=500
+layer=overlay
+location=top
+width=600
