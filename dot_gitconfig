@@ -75,13 +75,13 @@
 [user]
   name = Steve Loveless
 [includeIf "gitdir:~/Development/projects/"]
-  path = .gitconfig-personal
+  path = ~/.gitconfig-personal
 [includeIf "gitdir:~/Development/not_my_projects/"]
-  path = .gitconfig-personal
-[includeIf "gitdir:~/.local/share/yadm/repo.git"]
-  path = .gitconfig-personal
+  path = ~/.gitconfig-personal
+[includeIf "gitdir:~/.local/share/chezmoi/"]
+  path = ~/.gitconfig-personal
 [includeIf "gitdir:~/Development/tac/"]
-  path = .gitconfig-work
+  path = ~/.gitconfig-work
 
 [gpg]
   program = gpg
