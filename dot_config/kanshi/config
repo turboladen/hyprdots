@@ -1,0 +1,16 @@
+profile {
+  output eDP-1 mode 2880x1800 position 0,0 scale 2
+}
+
+# Home
+profile home {
+  output "Apple Computer Inc Thunderbolt C02LC48SF2GC" mode 2560x1440 position 0,0
+  output eDP-1 mode 2880x1800 position 2560,0 scale 2
+}
+
+# Work
+profile work {
+  output "Apple Computer Inc LED Cinema 2A04254H6JL" mode 2560x1440 position 0,0
+
+  output eDP-1 mode 2880x1800 position 1000,1440 scale 2
+}

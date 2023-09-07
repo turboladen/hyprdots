@@ -1,0 +1,87 @@
+[user]
+  name = Steve Loveless
+
+[alias]
+  st = status
+
+[init]
+  defaultBranch = main
+
+[commit]
+  gpgsign = true
+  ; template = /Users/{{ yadm.user }}/.stCommitMsg
+
+[color]
+  ui = true
+  status = auto
+  branch = auto
+  interactive = auto
+  diff = auto
+
+[core]
+  editor = nvim
+  pager = delta
+
+[delta]
+  features = decorations
+  hyperlink = true
+  line-numbers = true
+  side-by-side = true
+  syntax-theme = DarkNeon
+
+[delta "interactive"]
+  keep-plus-minus-markers = false
+
+[delta "decorations"]
+  commit-decoration-style = blue ol
+  commit-style = raw
+  file-style = omit
+  hunk-header-decoration-style = blue box
+  hunk-header-file-style = red
+  hunk-header-line-number-style = "#067a00"
+  hunk-header-style = file line-number syntax
+
+[diff]
+  colorMoved = default
+
+[difftool]
+  prompt = false
+
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+
+[init]
+  defaultBranch = main
+
+[interactive]
+  diffFilter = delta --color-only --features=interactive
+
+[merge]
+  conflictstyle = diff3
+  tool = diff3
+
+[pager]
+  branch = false
+
+[push]
+  default = simple
+
+[status]
+  submoduleSummary = true
+
+[user]
+  name = Steve Loveless
+[includeIf "gitdir:~/Development/projects/"]
+  path = .gitconfig-personal
+[includeIf "gitdir:~/Development/not_my_projects/"]
+  path = .gitconfig-personal
+[includeIf "gitdir:~/.local/share/yadm/repo.git"]
+  path = .gitconfig-personal
+[includeIf "gitdir:~/Development/tac/"]
+  path = .gitconfig-work
+
+[gpg]
+  program = gpg

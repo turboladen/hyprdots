@@ -1,0 +1,4 @@
+[user]
+  email = steve.loveless@gmail.com
+  signingkey = 66AB643601BEB772
+# vim:ft=gitconfig
