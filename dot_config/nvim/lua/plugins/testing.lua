@@ -29,13 +29,6 @@ return {
       }
     end,
     opts = {},
-    keys = {
-      { "<leader>tn", "<cmd>TestNearest<CR>", desc = "Run nearest test" },
-      { "<leader>tf", "<cmd>TestFile<CR>",    desc = "Run all tests in file" },
-      { "<leader>ta", "<cmd>TestSuite<CR>",   desc = "Run all tests in project" },
-      { "<leader>tl", "<cmd>TestLast<CR>",    desc = "Re-run the last test command" },
-      { "<leader>tg", "<cmd>TestVisit<CR>",   desc = "Visit the last test file" }
-    }
   },
 
   -- ╭───────────────────────────────────────────────────────────────────╮

@@ -20,7 +20,7 @@ local yadm_files = function()
       width = 80,
     },
   }
-  local files_string = vim.fn.system("yadm list -a")
+  local files_string = vim.fn.system("yadm list -a") or ""
   local files = vim.split(files_string, "\n")
 
   pickers.new(opts, {

@@ -371,5 +371,16 @@ return {
         types = true
       },
     },
+  },
+  -- ╭──────────────────────────────────────────────────╮
+  -- │ ✍️ All the npm/yarn commands I don't want to type │
+  -- ╰──────────────────────────────────────────────────╯
+  {
+    "vuki656/package-info.nvim",
+    dependencies = { "MunifTanjim/nui.nvim" },
+    config = function()
+      local package_info = require('package-info')
+      package_info.setup()
+    end
   }
 }

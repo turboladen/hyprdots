@@ -55,63 +55,6 @@ return {
         },
       }
     end,
-    keys = function()
-      local utils = require("plugins.editor.telescope_utils")
-      local builtins = require("telescope.builtin")
-
-      return {
-        {
-          "<leader><space>",
-          builtins.find_files,
-          desc = "tele: find",
-        },
-        {
-          "<leader><cr>",
-          builtins.buffers,
-          desc = "tele: buffers find",
-        },
-        {
-          "<leader>/",
-          builtins.live_grep,
-          desc = "tele: live grep",
-        },
-        {
-          "<leader>fk",
-          builtins.grep_string,
-          desc = "tele: string grep",
-        },
-        {
-          "<leader>fm",
-          builtins.marks,
-          desc = "tele: marks",
-        },
-        {
-          "<leader>fo",
-          builtins.oldfiles,
-          desc = "tele: old files",
-        },
-        {
-          "<leader>fn",
-          utils.nvim_config_files,
-          desc = "Show files in ~/.config/nvim/",
-        },
-        {
-          "<leader>fy",
-          utils.yadm_files,
-          desc = "Show YADM files",
-        },
-        {
-          "<leader>fa",
-          "<cmd>Telescope telescope-alternate alternate_file<CR>",
-          desc = "Show alternate file",
-        },
-        {
-          "<leader>fs",
-          "<cmd>Telescope aerial<CR>",
-          desc = "Show symbols via aerial",
-        },
-      }
-    end
   },
 
   -- ╭───────────────────────────────────────────────────────────────────────╮
@@ -166,7 +109,7 @@ return {
     opts = {
       plugins = { spelling = true },
       defaults = {
-        ["g"] = { name = "+goto" },
+        -- ["g"] = { name = "+goto" },
         ["]"] = { name = "+next" },
         ["["] = { name = "+prev" },
         ["<leader><tab>"] = { name = "+tabs" },
@@ -200,7 +143,7 @@ return {
         changedelete = { text = "⇄" },
       },
       current_line_blame = true,
-      yadm = { enable = true },
+      -- yadm = { enable = true },
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
 
@@ -248,70 +191,9 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     cmd = { "Trouble", "TroubleRefresh", "TroubleToggle" },
     opts = {
-      -- auto_preview = false,
       auto_close = true,
       use_diagnostic_signs = true
     },
-    config = function(_, opts)
-      require("trouble").setup(opts)
-    end,
-    keys = {
-      {
-        "<leader>xx",
-        "<cmd>Trouble<cr>",
-        desc = "Trouble",
-      },
-      {
-        "<leader>xr",
-        "<cmd>TroubleRefresh<cr>",
-        desc = "Trouble: refresh",
-      },
-      {
-        "<leader>xl",
-        "<cmd>Trouble loclist<cr>",
-        desc = "Trouble: -> loclist",
-      },
-      {
-        "<leader>xq",
-        "<cmd>Trouble quickfix<cr>",
-        desc = "Trouble: -> quickfix",
-      },
-      {
-        "<leader>xw",
-        "<cmd>Trouble workspace_diagnostics<cr>",
-        desc = "Trouble: workspace diags",
-      },
-      {
-        "<leader>xd",
-        "<cmd>Trouble document_diagnostics<cr>",
-        desc = "Trouble: doc diags",
-      },
-      {
-        "<leader>xR",
-        "<cmd>Trouble lsp_references<cr>",
-        desc = "Trouble: LSP references",
-      },
-      {
-        "<leader>xD",
-        "<cmd>Trouble lsp_definitions<cr>",
-        desc = "Trouble: LSP definitions",
-      },
-      {
-        "<leader>xT",
-        "<cmd>Trouble lsp_type_definitions<cr>",
-        desc = "Trouble: LSP type defs",
-      },
-      {
-        "<leader>]",
-        "<cmd>lua require('trouble').next({skip_groups = true, jump = true})<cr>",
-        desc = "Trouble: next",
-      },
-      {
-        "<leader>[",
-        "<cmd>lua require('trouble').prev({skip_groups = true, jump = true})<cr>",
-        desc = "Trouble: prev",
-      },
-    }
   },
 
   -- ╭─────────────────────────────────────────╮
@@ -327,11 +209,13 @@ return {
     opts = {
       filter_kind = false,
       on_attach = function(bufnr)
+        require('which-key').register({
+          ["<leader>a"] = {
+            name = "aerial",
+            a = { require("aerial").toggle, "aerieal: toggle", buffer = bufnr },
+          }
+        })
         local opts = { noremap = true, silent = true, buffer = bufnr }
-
-        -- Aerial does not set any mappings by default, so you'll want to set some up
-        -- Toggle the aerial window with <leader>a
-        vim.keymap.set("n", "<leader>aa", require("aerial").toggle, opts)
 
         -- Jump forwards/backwards with '{' and '}'
         vim.keymap.set("n", "{", require("aerial").prev, opts)
@@ -359,18 +243,6 @@ return {
     cmd = { "TodoTrouble", "TodoTelescope" },
     event = { "BufReadPost", "BufNewFile" },
     opts = {},
-    -- config = function(_, opts)
-    --   vim.keymap.set("n", "]t", require("todo-comments").jump_next, { desc = "Next todo comment" })
-    --   vim.keymap.set("n", "[t", require("todo-comments").jump_prev, { desc = "Previous todo comment" })
-    -- end,
-    keys = {
-      { "]t",         function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
-      { "[t",         function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
-      { "<leader>xt", "<cmd>TodoTrouble<cr>",                              desc = "Todo (Trouble)" },
-      { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>",      desc = "Todo/Fix/Fixme (Trouble)" },
-      { "<leader>st", "<cmd>TodoTelescope<cr>",                            desc = "Todo" },
-      { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>",    desc = "Todo/Fix/Fixme" },
-    },
   },
 
   -- ╭──────────────────────────╮
@@ -378,39 +250,6 @@ return {
   -- ╰──────────────────────────╯
   {
     "kevinhwang91/nvim-hlslens",
-    keys = {
-      {
-        "n",
-        [[<cmd>execute('normal! ' . v:count1 . 'n')<CR><cmd>lua require('hlslens').start()<CR>]],
-        { desc = "Go to next search match" }
-      },
-      {
-        "N",
-        [[<cmd>execute('normal! ' . v:count1 . 'N')<CR><cmd>lua require('hlslens').start()<CR>]],
-        { desc = "Go to previous search match" }
-      },
-      {
-        "*",
-        [[*<cmd>lua require('hlslens').start()<CR>]],
-        { desc = "Search forward for <word> under cursor" }
-      },
-      {
-        "#",
-        [[#<cmd>lua require('hlslens').start()<CR>]],
-        { desc = "Search backward for <word> under cursor" }
-      },
-      {
-        "g*",
-        [[g*<cmd>lua require('hlslens').start()<CR>]],
-        { desc = "Search forward for word under cursor" }
-      },
-      {
-        "g#",
-        [[g#<cmd>lua require('hlslens').start()<CR>]],
-        { desc = "Search backward for word under cursor" }
-      },
-      { "<leader>l", ":noh<CR>", { desc = "Stop highlighting the hlsearch" } },
-    },
     opts = {}
   },
   -- ╭─────────────────────────────────────────────────────────────╮

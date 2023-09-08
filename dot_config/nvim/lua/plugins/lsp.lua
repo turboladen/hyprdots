@@ -17,47 +17,49 @@ local function make_attach_things()
         }
       end
 
-      vim.keymap.set('n', '<leader>cd', vim.diagnostic.open_float, opts("Open diagnostic in float"))
-      vim.keymap.set('n', '<leader>cl', "<cmd>LspInfo<cr>", opts("LspInfo"))
-      -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts("Goto definition"))
-      vim.keymap.set('n', 'gd', "<cmd>Telescope lsp_definitions<cr>", opts("Goto definition"))
-      vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts("Goto declaration"))
-      -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-      vim.keymap.set('n', 'gr', "<cmd>Telescope lsp_references<cr>", opts("Show references"))
-      -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts("Goto implementation"))
-      vim.keymap.set('n', 'gi', "<cmd>Telescope lsp_implementations<cr>", opts("Goto implementation"))
-      -- vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
-      vim.keymap.set('n', 'gy', "<cmd>Telescope lsp_type_definitinos<cr>", opts("Got t[y]pe definition"))
-      -- vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-      vim.keymap.set('n', 'K', require("turboladen.lsp").hover, opts("Show docs"))
+      require("which-key").register({
+        g = {
+          d = { vim.lsp.buf.definition, "Goto definition", buffer = ev.buf },
+          D = { vim.lsp.buf.declaration, "Goto declaration", buffer = ev.buf },
+          r = { vim.lsp.buf.references, "Goto references", buffer = ev.buf },
+          i = { vim.lsp.buf.implementation, "Goto implementation", buffer = ev.buf },
+        },
 
-      vim.keymap.set('n', 'gK>', vim.lsp.buf.signature_help, opts("Signature help"))
+        ["<leader>f"] = {
+          r = { "<cmd>Telescope lsp_references<cr>", "tele: references", buffer = ev.buf },
+          i = { "<cmd>Telescope lsp_implementations<cr>", "tele: implementations", buffer = ev.buf },
+        },
+
+        ["<leader>x"] = {
+          f = { vim.diagnostic.open_float, "Open diagnostic in float" },
+          i = { "<cmd>LspInfo<cr>", "LspInfo" },
+        }
+      })
+
+      -- vim.keymap.set('n', 'gK', vim.lsp.buf.signature_help, opts("Signature help"))
       vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, opts("Signature help"))
 
-      vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename, opts("Rename"))
-      vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts("Code action"))
+      -- vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename, opts("Rename"))
+      -- vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts("Code action"))
 
-      vim.keymap.set('n', '[g', vim.diagnostic.goto_prev, opts("Previous diagnostic"))
-      vim.keymap.set('n', ']g', vim.diagnostic.goto_next, opts("Next diagnostic"))
-      vim.keymap.set('n', '<leader>cq', vim.diagnostic.setloclist, opts("Add buffer diagnostics to loclist"))
+      -- vim.keymap.set('n', '[g', vim.diagnostic.goto_prev, opts("Previous diagnostic"))
+      -- vim.keymap.set('n', ']g', vim.diagnostic.goto_next, opts("Next diagnostic"))
+      -- vim.keymap.set('n', '<leader>cq', vim.diagnostic.setloclist, opts("Add buffer diagnostics to loclist"))
 
-      vim.keymap.set('n', '<leader>co', require("telescope.builtin").lsp_document_symbols, opts("Show doc symbols"))
-      vim.keymap.set('n', '<leader>cw', require("telescope.builtin").lsp_dynamic_workspace_symbols,
-        opts("Show workspace symbols"))
+      -- vim.keymap.set('n', '<leader>co', require("telescope.builtin").lsp_document_symbols, opts("Show doc symbols"))
+      -- vim.keymap.set('n', '<leader>cw', require("telescope.builtin").lsp_dynamic_workspace_symbols,
+      --   opts("Show workspace symbols"))
 
 
       -- vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
       -- vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
       --
-      vim.keymap.set('n', '<leader>wl', function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-      end, opts("List workspace folders"))
 
-      vim.keymap.set('n', '<leader>ff', function()
-        -- TODO: lspconfig uses true; my old config had false.
-        vim.lsp.buf.format { async = true }
-        -- vim.lsp.buf.format { async = false }
-      end, opts("Format (vis LSP)"))
+      -- vim.keymap.set('n', '<leader>ff', function()
+      --   -- TODO: lspconfig uses true; my old config had false.
+      --   vim.lsp.buf.format { async = true }
+      --   -- vim.lsp.buf.format { async = false }
+      -- end, opts("Format (vis LSP)"))
 
       require("fidget").setup({})
     end,
@@ -124,9 +126,6 @@ return {
       {
         "williamboman/mason.nvim",
         cmd = "Mason",
-        keys = {
-          { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" },
-        },
         opts = {},
       },
       "neovim/nvim-lspconfig",

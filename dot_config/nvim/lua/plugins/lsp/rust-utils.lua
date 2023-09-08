@@ -5,15 +5,16 @@ local function make_attach_things(rust_tools)
     group = vim.api.nvim_create_augroup('UserRustLspConfig', {}),
     pattern = "*.rs",
     callback = function(ev)
-      -- Buffer local mappings.
-      -- See `:help vim.lsp.*` for documentation on any of the below functions
-      local opts = { buffer = ev.buf }
-
-      vim.keymap.set('n', 'K', rust_tools.hover_actions.hover_actions, opts)
-      vim.keymap.set('n', '<leader>cg', rust_tools.code_action_group.code_action_group, opts)
-      vim.keymap.set('n', '<leader>ff', "<cmd>RustFmt<CR>", opts)
-      vim.keymap.set('n', 'gJ', "<cmd>RustJoinLines<CR>", opts)
-      -- vim.keymap.set({'n', 'v'}, '<leader>ca', "<cmd>RustCodeAction<CR>", opts)
+      require("which-key").register({
+        K = { rust_tools.hover_actions.hover_actions, "Rust: hover actions", buffer = ev.buf },
+        gJ = { "<cmd>RustJoinLines<CR>", "Rust: join lines", buffer = ev.buf },
+        ['<leader>cg'] = {
+          rust_tools.code_action_group.code_action_group,
+          "Rust: code-action group",
+          buffer = ev.buf,
+        },
+        ['<leader>ff'] = { "<cmd>RustFmt<CR>", "Rust: rustfmt", buffer = ev.buf },
+      })
     end,
   })
 end

@@ -2,32 +2,6 @@
 --         │    ✨ Clarify and beautify your comments using boxes     │
 --         │                        and lines.                        │
 --         ╰──────────────────────────────────────────────────────────╯
-
----Make an centered box with centered text, then format. Good for file headers.
---
----@param style number
-local function cc_box(style)
-  style = style or 3
-  require("comment-box").ccbox(style)
-  vim.lsp.buf.format({ async = false })
-end
-
-function TurboladenCcBox(style)
-  cc_box(style)
-end
-
----Make an adapted box with left-aligned text, then format.
---
----@param style number
-local function al_box(style)
-  require("comment-box").albox(style)
-  vim.lsp.buf.format({ async = false })
-end
-
-function TurboladenAlBox(style)
-  al_box(style)
-end
-
 return {
   "LudoPinelli/comment-box.nvim",
   lazy = true,
@@ -70,8 +44,4 @@ return {
     -- Show the catalog
     "CBcatalog"
   },
-  keys = {
-    { "<leader>bb", al_box, mode = { "n", "v" }, desc = "Left-aligned box; left-aligned text" },
-    { "<leader>bt", cc_box, desc = "Title box" },
-  }
 }
