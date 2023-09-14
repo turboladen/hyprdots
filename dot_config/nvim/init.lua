@@ -225,7 +225,7 @@ wk.register({
     ["<space>"] = { require('telescope.builtin').find_files, "tele: find" },
     ["<cr>"] = { require('telescope.builtin').buffers, "tele: buffers" },
     ["/"] = { require('telescope.builtin').live_grep, "tele: live grep" },
-    ["."] = { "<cmd>Rg<space>", "rg" },
+    ["."] = { ":Rg<space>", "rg" },
     l = { ":noh<CR>", "Stop highlighting the hlsearch" },
   },
 
