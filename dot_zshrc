@@ -229,16 +229,6 @@ alias upd="/usr/bin/update"
 # Replace yay with paru if installed
 [ ! -x /usr/bin/yay ] && [ -x /usr/bin/paru ] && alias yay='paru'
 
-# Load Mcfly
-export MCFLY_FUZZY=true
-export MCFLY_RESULTS=20
-export MCFLY_INTERFACE_VIEW=BOTTOM
-export MCFLY_RESULTS_SORT=LAST_RUN
-eval "$(mcfly init zsh)"
-
-## Run neofetch
-neofetch
-
 
 
 ##-------------------------
@@ -300,3 +290,14 @@ eval "$(fnm completions --shell zsh)"
 export EDITOR=nvim
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+# Load Mcfly
+export MCFLY_FUZZY=true
+export MCFLY_RESULTS=20
+export MCFLY_INTERFACE_VIEW=BOTTOM
+export MCFLY_RESULTS_SORT=LAST_RUN
+export MCFLY_KEY_SCHEME=vim
+eval "$(mcfly init zsh)"
+
+## Run neofetch
+neofetch
+
