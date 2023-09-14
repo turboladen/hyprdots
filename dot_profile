@@ -1,6 +1,5 @@
 # export EDITOR=/usr/bin/micro
 export EDITOR=/usr/bin/nvim
-# export BROWSER=firedragon
 export BROWSER=firefox
 export TERM=alacritty
 # export MAIL=geary
