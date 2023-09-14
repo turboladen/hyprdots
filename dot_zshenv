@@ -8,3 +8,6 @@ source /usr/share/chruby/auto.sh
 
 # Node
 eval "$(fnm env --use-on-cd)"
+
+# Not sure I need this anymore
+# export XDG_DATA_DIRS=/usr/local/share:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share
