@@ -1,4 +1,7 @@
 return {
+  --  ╭──────────────────────────────────────────╮
+  --  │ Snippet plugin for Neovim written in Lua │
+  --  ╰──────────────────────────────────────────╯
   {
     "dcampos/nvim-snippy",
     dependencies = { "honza/vim-snippets" },
@@ -60,7 +63,9 @@ return {
             }
           end
 
-          vim.keymap.set('n', '<leader>ct', "<cmd>lua require('crates').toggle<cr>", opts("crates: enable/disable info"))
+          vim.keymap.set('n', '<leader>ct', require('crates').toggle, opts("crates: enable/disable info"))
+          vim.keymap.set('n', '<leader>cu', require('crates').upgrade_crate, opts("crates: update current"))
+          vim.keymap.set('n', '<leader>cl', require('crates').upgrade_all_crates, opts("crates: update all"))
         end
       })
     end,

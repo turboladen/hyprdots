@@ -290,7 +290,10 @@ eval "$(fnm completions --shell zsh)"
 export EDITOR=nvim
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-# Load Mcfly
+
+#  ╭────────────╮
+#  │ Load Mcfly │
+#  ╰────────────╯
 export MCFLY_FUZZY=true
 export MCFLY_RESULTS=20
 export MCFLY_INTERFACE_VIEW=BOTTOM

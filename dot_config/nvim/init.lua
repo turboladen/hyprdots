@@ -15,29 +15,6 @@ local function set_host_progs()
   -- vim.g.python3_host_prog = vim.g.turboladen_homebrew_prefix .. '/bin/python3'
 end
 
--- ╭───────────────────────────────────────────────────────────────────────────────╮
--- │ Note to self: When I switched to nvim-oxi, I switched to follow its convention│
--- │ for loading the .so: put it in a dir that's in rtp, letting us load that by   │
--- │ simply doing:                                                                 │
--- │ lua require('init_rs')                                                        │
--- ╰───────────────────────────────────────────────────────────────────────────────╯
-local function load_init_rs()
-  local ffi = require("ffi")
-
-  ffi.cdef [[
-void init_mappings(void);
-void init_options(void);
-]]
-
-  local project_path = vim.env.HOME .. "/Development/projects/init.rs"
-  local suffix = ffi.os == "OSX" and ".dylib" or ".so"
-
-  local lib = ffi.load(project_path .. "/target/release/libinit_rs" .. suffix)
-  -- local lib = ffi.load(project_path .. "/target/debug/libnvim_rust_init" .. suffix)
-  lib.init_mappings()
-  lib.init_options()
-end
-
 local function define_wasm_autocmds()
   -- vim -b : edit binary using xxd-format!
   local wasm_group = vim.api.nvim_create_augroup("WasmGroup", {})
@@ -104,15 +81,17 @@ local function set_wild_opts()
   }
 end
 
--- ╭────────────────────────────╮
--- │ 0. Load packer stuff first │
--- ╰────────────────────────────╯
+-- ╭───────────────────────────────────────────────────╮
+-- │ 0. Load special things before plugins stuff first │
+-- ╰───────────────────────────────────────────────────╯
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.loaded_perl_provider = 0
 vim.opt.termguicolors = true
 
--- lazy.nvim things
+--  ╭──────────────────╮
+--  │ lazy.nvim things │
+--  ╰──────────────────╯
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
@@ -141,11 +120,7 @@ require("lazy").setup("plugins", {
   }
 })
 
--- Set the global var for the homebrew prefix.
--- require('turboladen/homebrew').prefix()
-
 set_host_progs()
--- load_init_rs()
 
 -- ╭────────────────────╮
 -- │ 4. displaying text │

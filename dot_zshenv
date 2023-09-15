@@ -1,12 +1,18 @@
-# Rust
+#  ╭──────╮
+#  │ Rust │
+#  ╰──────╯
 PATH=$PATH:"$HOME/.cargo/bin"
 
-# Ruby
+#  ╭──────╮
+#  │ Ruby │
+#  ╰──────╯
 source /usr/share/chruby/chruby.sh
 chruby 3
 source /usr/share/chruby/auto.sh
 
-# Node
+#  ╭──────╮
+#  │ Node │
+#  ╰──────╯
 eval "$(fnm env --use-on-cd)"
 
 # Not sure I need this anymore
